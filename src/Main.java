@@ -27,7 +27,9 @@ public class Main {
 
     private static List<String> getShortLines(List<String> txt, int maxlen){
         List<String> result = new ArrayList<>();
-
+        for (String s: txt)
+            if (s.length() < maxlen)
+                result.add(s);
         return result;
     }
 
