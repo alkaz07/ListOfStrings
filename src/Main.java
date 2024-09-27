@@ -5,6 +5,11 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
+        //exercise();
+        testCSV();
+    }
+
+    private static void exercise() {
         //прочитать строки из файла в список строк
         List<String> txt = loadText("a.txt");
         System.out.println(txt);
@@ -23,6 +28,11 @@ public class Main {
         //подсчитать, сколько в списке строк, которые начинаются на "Вася"
         int n = countLinesWithPrefix(txt, "Вася");
         System.out.println("n = " + n);
+    }
+
+    private static void testCSV(){
+        List<String> txt = loadCSV("comma separated values.txt");
+        System.out.println("txt = " + txt);
     }
 
     private static List<String> getShortLines(List<String> txt, int maxlen){
@@ -67,6 +77,29 @@ public class Main {
             while (scanner.hasNext()) {
                 String s = scanner.nextLine();
                 lines.add(s);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("файл не открылся");
+            System.out.println(e.getMessage());
+        }
+
+        return lines;
+    }
+
+    //Нужно получить из файла список имен. в файле они разделяются символом ;
+    private static List<String> loadCSV(String filename) {
+        //создаем пустой список
+        List<String> lines = new ArrayList<>();
+
+        try (Scanner scanner = new Scanner(new File(filename))){ //открываем сканером файл
+            //циклом вычитываем строки и добавляем в список
+            while (scanner.hasNext()) {
+                String s = scanner.nextLine();
+                String[] massiv = s.split(";");
+                for (String str: massiv) {
+                    String trimmedStr = str.trim();
+                    lines.add(trimmedStr);
+                }
             }
         } catch (FileNotFoundException e) {
             System.out.println("файл не открылся");
