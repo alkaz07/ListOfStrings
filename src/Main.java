@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,6 +14,8 @@ public class Main {
         List<String> unique2 = new ArrayList<>(new TreeSet<>(txt));
         System.out.println(unique2);
 
+        List<String> unique3 = txt.stream().distinct().toList();
+        System.out.println(unique3);
         //подсчитать, сколько раз в файле содержится строка "Вася Пупкин"
         int k = countVasyaPupkin(txt, "Вася Пупкин");
         System.out.println("k = " + k);
@@ -20,7 +23,9 @@ public class Main {
 
     private static int countVasyaPupkin(List<String> txt, String x) {
         int counter=0;
-
+        for (String s: txt)
+            if (s.equals(x))
+                counter++;
         return counter;
     }
 
