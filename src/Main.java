@@ -19,8 +19,27 @@ public class Main {
         //подсчитать, сколько раз в файле содержится строка "Вася Пупкин"
         int k = countVasyaPupkin(txt, "Вася Пупкин");
         System.out.println("k = " + k);
+
+        //подсчитать, сколько в списке строк, которые начинаются на "Вася"
+        int n = countLinesWithPrefix(txt, "Вася");
+        System.out.println("n = " + n);
     }
 
+    private static List<String> getShortLines(List<String> txt, int maxlen){
+        List<String> result = new ArrayList<>();
+
+        return result;
+    }
+
+    private static int countLinesWithPrefix(List<String> txt, String prefix) {
+        int counter=0;
+        for (String s: txt)
+            if (s.startsWith(prefix))
+                counter++;
+        return counter;
+    }
+    
+    
     private static int countVasyaPupkin(List<String> txt, String x) {
         int counter=0;
         for (String s: txt)
@@ -28,6 +47,8 @@ public class Main {
                 counter++;
         return counter;
     }
+    
+    
 
     private static int countXByStream(List<String> txt, String x) {
         return  (int) txt.stream()
