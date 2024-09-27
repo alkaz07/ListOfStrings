@@ -19,7 +19,9 @@ public class Main {
     }
 
     private static int countVasyaPupkin(List<String> txt, String x) {
+        int counter=0;
 
+        return counter;
     }
 
     private static List<String> loadText(String filename) {
