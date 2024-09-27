@@ -29,6 +29,12 @@ public class Main {
         return counter;
     }
 
+    private static int countXByStream(List<String> txt, String x) {
+        return  (int) txt.stream()
+                            .filter(s->s.equals(x))
+                            .count();
+    }
+
     private static List<String> loadText(String filename) {
         //создаем пустой список
         List<String> lines = new ArrayList<>();
