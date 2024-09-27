@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        //exercise();
-        testCSV();
+        exercise();
+        // testCSV();
     }
 
     private static void exercise() {
@@ -28,51 +28,66 @@ public class Main {
         //подсчитать, сколько в списке строк, которые начинаются на "Вася"
         int n = countLinesWithPrefix(txt, "Вася");
         System.out.println("n = " + n);
+
+        var shortLines = getShortLines(txt, 15);
+        //   shortLines.sort(String::compareTo);
+        shortLines.sort(Comparator.naturalOrder());
+        System.out.println("shortLines = " + shortLines);
+        //Заменить в списке строк все буквы В на V
+        replaceSymbolsInLines(txt, 'В', 'V');
+        System.out.println("txt = " + txt);
     }
 
-    private static void testCSV(){
+    private static void replaceSymbolsInLines(List<String> txt, char oldC, char newC) {
+        for (int i=0; i< txt.size(); i++) {
+            String s = txt.get(i);
+            s = s.replace(oldC, newC);
+            txt.set(i, s);
+        }
+    }
+
+    private static void testCSV() {
         List<String> txt = loadCSV("comma separated values.txt");
         System.out.println("txt = " + txt);
     }
 
-    private static List<String> getShortLines(List<String> txt, int maxlen){
+    private static List<String> getShortLines(List<String> txt, int maxlen) {
         List<String> result = new ArrayList<>();
-        for (String s: txt)
+        for (String s : txt)
             if (s.length() < maxlen)
                 result.add(s);
         return result;
     }
 
     private static int countLinesWithPrefix(List<String> txt, String prefix) {
-        int counter=0;
-        for (String s: txt)
+        int counter = 0;
+        for (String s : txt)
             if (s.startsWith(prefix))
                 counter++;
         return counter;
     }
-    
-    
+
+
     private static int countVasyaPupkin(List<String> txt, String x) {
-        int counter=0;
-        for (String s: txt)
+        int counter = 0;
+        for (String s : txt)
             if (s.equals(x))
                 counter++;
         return counter;
     }
-    
-    
+
 
     private static int countXByStream(List<String> txt, String x) {
-        return  (int) txt.stream()
-                            .filter(s->s.equals(x))
-                            .count();
+        return (int) txt.stream()
+                .filter(s -> s.equals(x))
+                .count();
     }
 
     private static List<String> loadText(String filename) {
         //создаем пустой список
         List<String> lines = new ArrayList<>();
 
-        try (Scanner scanner = new Scanner(new File(filename))){ //открываем сканером файл
+        try (Scanner scanner = new Scanner(new File(filename))) { //открываем сканером файл
             //циклом вычитываем строки и добавляем в список
             while (scanner.hasNext()) {
                 String s = scanner.nextLine();
@@ -91,12 +106,12 @@ public class Main {
         //создаем пустой список
         List<String> lines = new ArrayList<>();
 
-        try (Scanner scanner = new Scanner(new File(filename))){ //открываем сканером файл
+        try (Scanner scanner = new Scanner(new File(filename))) { //открываем сканером файл
             //циклом вычитываем строки и добавляем в список
             while (scanner.hasNext()) {
                 String s = scanner.nextLine();
                 String[] massiv = s.split(";");
-                for (String str: massiv) {
+                for (String str : massiv) {
                     String trimmedStr = str.trim();
                     lines.add(trimmedStr);
                 }
